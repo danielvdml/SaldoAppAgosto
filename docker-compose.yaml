@@ -1,0 +1,26 @@
+version: '2'
+services:
+  db:
+    container_name: agosto_db_10
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - agosto-db-data:/var/lib/postgresql/data/pgdata
+  web:
+    container_name: agosto_odoo_12
+    image: odoo:12
+    depends_on:
+      - db
+    ports:
+      - "$port:8069"
+      - "$chat_port:8072"
+    volumes:
+      - agosto-web-data:/var/lib/odoo
+      - ./docker:/etc/odoo/
+      - ./addons:/mnt/extra-addons
+volumes:
+  agosto-web-data:
+  agosto-db-data:
