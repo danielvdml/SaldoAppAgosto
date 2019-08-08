@@ -2,7 +2,7 @@
 Vistas Avanzadas -> Formulario I
 --> Atributos de las etiquetas field "attr"-----> invisible,readonly,required
 -----> Filtros -> domain, "context" 
------> widget -> statusbar, float_time, selection, radio, many2many_tags ...
+-----> widget -> statusbar, float_time, selection, radio, many2many_tags, Monetary ...
 -----> Botones -> Tipo - Objeto / Action
 --> Múltiples vistas para un mismo modelo (Relación de acciíones de ventana a menús)
 ------> Movimiento (Ingreso/Egreso)
@@ -17,7 +17,7 @@ Modelos Avanzados
 
 ================================================================================
 
-1. comprobante de pago
+1. comprobante de pago -> Como descargar en el formato del archivo  --- el nombre del archivo
 2. Personalizar vista formulario para el tipo ingreso y egreso
 3. -----> widget -> statusbar, float_time, selection, radio, many2many_tags ...
 
