@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <!--model ir.ui.view ir.actions.act_window ir.menu-->
+        <record id = "saldo_app.movimiento_0" model="sa.movimiento">
+            <field name="name">Ingreso por Trabajo Freelance - Desarrollo de Web</field>
+            <field name="tipo">i</field>
+            <field name="monto">982</field>
+        </record>
+
+        <record id = "saldo_app.movimiento_2" model="sa.movimiento">
+            <field name="name">Egreso por compra de lavadora</field>
+            <field name="tipo">e</field>
+            <field name="monto">1500</field>
+        </record>
+
+        <record id = "saldo_app.movimiento_1" model="sa.movimiento">
+            <field name="name">Ingreso por Desarrollo de Facturación</field>
+            <field name="tipo">i</field>
+            <field name="monto">2000</field>
+        </record>
+    </data>
+</odoo>

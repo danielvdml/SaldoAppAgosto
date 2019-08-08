@@ -1,5 +1,6 @@
 <odoo>
-  <data>
+
+  <data noupdate="0">
     <!-- explicit list view definition -->
     <!--
     <record model="ir.ui.view" id="saldo_app.list">
@@ -56,5 +57,127 @@
     <menuitem name="Server to list" id="saldo_app" parent="saldo_app.menu_2"
               action="saldo_app.action_server"/>
     -->
+
+
+    <!--VISTA ESPECIAL PARA INGRESOS-->
+    <record id="saldo_app.view_tree_movimiento_ingresos" model="ir.ui.view">
+      <field name="name">view.tree.movimiento.ingresos</field>
+      <field name="model">sa.movimiento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="monto"/> 
+          <field name="tipo"/>       
+        </tree>
+      </field>
+    </record>
+
+    <!--VISTA ESPECIAL PARA EGRESOS-->
+    <record id="saldo_app.view_tree_movimiento_egresos" model="ir.ui.view">
+      <field name="name">view.tree.movimiento.egresos</field>
+      <field name="model">sa.movimiento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tipo"/>  
+          <field name="name"/>
+          <field name="monto"/> 
+        </tree>
+      </field>
+    </record>
+
+    <record id="saldo_app.view_form_movimiento" model="ir.ui.view">
+      <field name="name">view.form.movimiento</field>
+      <field name="model">sa.movimiento</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="name" attrs="{'required':[('tipo','=','i')]}"/>
+                <field name="numero_comprobante" attrs="{'required':1 }"/>
+                <field name="monto" attrs="{'readonly':[('tipo','=','i')]}"/> 
+              </group>
+              <group>
+                <field name="comprobante_pago" attrs="{'invisible':[('tipo','=','e')]}"/>
+                <field name="tipo" widget="radio"/>  
+                <field name="fecha"/>
+              </group>
+            </group>
+            
+            <group string="Otros Datos">
+              <field name="categoria_ids" widget="many2many_tags"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="saldo_app.view_action_movimiento" model="ir.actions.act_window">
+      <field name="name">Movimientos - Action</field>
+      <field name="res_model">sa.movimiento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--ACTION DE VENTANA para Filtrar ingresos-->
+    <record id="saldo_app.view_action_movimiento_ingreso" model="ir.actions.act_window">
+      <field name="name">Ingresos</field>
+      <field name="res_model">sa.movimiento</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('tipo','=','i')]</field>
+      <field name="context">{'default_tipo':'i','default_monto':100}</field>
+    </record>
+
+    <record id="saldo_app.view_action_movimiento_ingreso_view" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="saldo_app.view_action_movimiento_ingreso" />
+        <field name="view_id" ref="saldo_app.view_tree_movimiento_ingresos" />
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!--ACTION DE VENTANA para Filtrar Egresos-->
+    <record id="saldo_app.view_action_movimiento_egreso" model="ir.actions.act_window">
+      <field name="name">Egresos</field>
+      <field name="res_model">sa.movimiento</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('tipo','=','e')]</field>
+      <field name="context">{'default_tipo':'e','default_monto':400}</field>
+    </record>
+
+    
+    <record id="saldo_app.view_action_movimiento_egreso_view" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="saldo_app.view_action_movimiento_egreso" />
+        <field name="view_id" ref="saldo_app.view_tree_movimiento_egresos" />
+        <field name="view_mode">tree</field>
+    </record>
+    
+
+  <!---
+    <menuitem name="Movimientos" 
+              id="saldo_app.menu_movimiento" 
+              parent=""
+              action="saldo_app.view_action_movimiento"/>
+  -->
+
+    <record id="saldo_app.menu_movimiento" model="ir.ui.menu">
+      <field name="name">Movimientos Menu</field>
+      <field name="parent_id"/>
+      <field name="action" ref="saldo_app.view_action_movimiento"/>
+      <field name="sequence">10</field>
+    </record>
+
+      <record id="saldo_app.menu_movimiento_ingreso" model="ir.ui.menu">
+        <field name="name">Ingresos</field>
+        <field name="parent_id" ref="saldo_app.menu_movimiento"/>
+        <field name="action" ref="saldo_app.view_action_movimiento_ingreso"/>
+        <field name="sequence">10</field>
+      </record>
+
+      <record id="saldo_app.menu_movimiento_egreso" model="ir.ui.menu">
+        <field name="name">Egresos</field>
+        <field name="parent_id" ref="saldo_app.menu_movimiento"/>
+        <field name="action" ref="saldo_app.view_action_movimiento_egreso"/>
+        <field name="sequence">10</field>
+      </record>
+
   </data>
 </odoo>
