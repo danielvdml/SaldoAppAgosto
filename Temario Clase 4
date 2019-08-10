@@ -1,0 +1,7 @@
+Temario Clase 4 
+===============
+Lista de Tareas:
+-> Usar el atributo editable en la etiqueta tree
+-> Agregar botones "Ver mis Ingresos" y "ver mis egresos"
+-> Investigar los otros valores que puede tomar la etiqueta "target" -> self ...
+-> Definir una nueva vista de tipo formulario para res.users

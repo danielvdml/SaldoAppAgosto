@@ -58,6 +58,18 @@
               action="saldo_app.action_server"/>
     -->
 
+    <!--VISTA ESPECIAL PARA INGRESOS-->
+    <record id="saldo_app.view_tree_movimientos" model="ir.ui.view">
+      <field name="name">view.tree.movimientos</field>
+      <field name="model">sa.movimiento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="monto"/> 
+          <field name="tipo"/>       
+        </tree>
+      </field>
+    </record>
 
     <!--VISTA ESPECIAL PARA INGRESOS-->
     <record id="saldo_app.view_tree_movimiento_ingresos" model="ir.ui.view">

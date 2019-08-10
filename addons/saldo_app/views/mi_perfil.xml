@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="saldo_app.action_server_view_mi_perfil" model="ir.actions.server">
+            <field name="name">Mi Perfil</field>
+            <field name="model_id" ref="saldo_app.model_res_users"/>
+            <field name="model">res.users</field>
+            <field name="state">code</field>
+            <field name="code">action = model.ver_mi_perfil()</field>
+        </record>
+
+        <record id="saldo_app.menu_mi_perfil" model="ir.ui.menu">
+            <field name="name">Mi Perfil</field>
+            <field name="parent_id" ref="saldo_app.menu_movimiento"/>
+            <field name="string">Mi Perfil</field>
+            <field name="action" ref="saldo_app.action_server_view_mi_perfil"/>
+        </record>
+    </data>
+</odoo>

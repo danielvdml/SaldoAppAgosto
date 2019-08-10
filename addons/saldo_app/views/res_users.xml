@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record id="saldo_app.view_form_extend_res_users" model="ir.ui.view">
+            <field name="name">view.form.extend.res.users</field>
+            <field name="model">res.users</field>
+            <!--Vista a la cual se le va a a agregar nuevos campos y/o botones-->
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <!--
+                    inside
+                    after
+                    before
+                    replace
+                    -> attributes
+                -->
+                <xpath expr="//header" position="inside">
+                    <button name="ver_mis_movimientos" string="Ver Movimientos" type="object" class="oe_highlight"/>
+                    <button name="actualizar_datos" string="Actualizar Datos" type="object" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Datos Personales">
+                        <group>
+                            <field name="edad"/>
+                            <field name="description_html"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="saldo_app.views_form_usuario_temporal" model="ir.ui.view">
+            <field name="name">view.form.usuario.temporal</field>
+            <field name="model">sa.usertemporal</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="edad_x"/>
+                        <field name="desc_html"/>
+                    </group>
+                    <footer>
+                        <button name="guardar_datos" string="Guardar Datos" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
