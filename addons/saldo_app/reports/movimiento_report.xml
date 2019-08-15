@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <!--Acción de tipo reporte-->
+        <report 
+            id="saldo_app.sa_report_movimiento_report"
+            model="sa.movimiento"
+            string="Detalle Movimiento"
+            report_type="qweb-pdf"
+            name="saldo_app.sa_report_movimiento"
+        />
+
+        <!--template es una función  - se le pasa como parametro una lista de registros-->
+        <!--docs = [ registro 1, registro 2, registro 3 ....]-->
+        <template id="saldo_app.sa_report_movimiento">
+            <t t-call="web.html_container"> <!--Me proporcina el CSS-->
+                <t t-foreach="movimientos" t-as="movimiento">
+                    <div class="page">
+                        <t t-call="web.external_layout"><!--Me proporcina el header y footer-->
+                            <h1> 
+                                <t t-esc="titulo"/> - <t t-esc="movimiento.name"/>
+                            </h1>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Fecha</th>
+                                        <th>Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><t t-esc="movimiento.numero_comprobante"/></td>
+                                        <td><t t-esc="movimiento.fecha"/></td>
+                                        <t t-if="movimiento.monto&gt;100"> <!--&gt; Mayor que-->
+                                            <span>El monto es mayor a 100</span>
+                                            <td><t t-esc="movimiento.monto"/></td>
+                                        </t>
+                                        <t t-if="movimiento.monto&lt;100"> <!--&lt; menor que - less than  -->
+                                            <span>El monto es menor a 100</span>
+                                            <td><t t-esc="movimiento.monto"/></td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                            <t t-esc="mensaje(movimiento.create_uid.name)"/>                        
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

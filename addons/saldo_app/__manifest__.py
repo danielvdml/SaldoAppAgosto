@@ -28,7 +28,8 @@
         'views/templates.xml',
         'data/movimientos.xml',
         'views/res_users.xml',
-        'views/mi_perfil.xml'
+        'views/mi_perfil.xml',
+        'reports/movimiento_report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
