@@ -26,5 +26,9 @@
         <!--     <field name="value">40</field> -->
         <!--   </record> -->
         <!--  -->
+        <record id="saldo_app.demo_usuario_cliente" model="res.users">
+            <field name="name">Cliente</field>
+            <field name="login">cliente@saldoapp.com</field>
+        </record>
     </data>
 </odoo>

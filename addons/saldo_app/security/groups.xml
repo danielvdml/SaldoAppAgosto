@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <!--APLICACION-->        
+        <record id="saldo_app.application_saldo_app" model="ir.module.category">
+            <field name="name">Saldo APP</field>
+        </record>
+        
+        <!--GRUPO ADMINISTRADOR-->
+        <record id="saldo_app.grupo_administrador" model="res.groups">
+            <field name="name">Administrador</field>
+            <field name="category_id" ref="saldo_app.application_saldo_app"/>
+            <field name="users" eval="[(4, ref('base.user_admin'))]" />
+        </record>
+
+            <!--PERMISOS DE ACCESO DE ADMINISTRADOR A MOVIMIENTOS-->
+            <record id="saldo_app.access_movimientos_admin" model="ir.model.access">
+                <field name="name">access.movimiento.admin</field>
+                <field name="model_id" ref="saldo_app.model_sa_movimiento"/>
+                <field name="group_id" ref="saldo_app.grupo_administrador"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="False" />
+                <field name="perm_write" eval="False" />
+                <field name="perm_unlink" eval="False" />
+                <field name="active" eval="True" />
+            </record>
+            <!--PERMISOS DE ACCESO DE ADMINISTRADOR A CATEGORIAS-->
+            <record id="saldo_app.access_categoria_admin" model="ir.model.access">
+                <field name="name">access.sa.categoria.admin</field>
+                <field name="model_id" ref="saldo_app.model_sa_categoria"/>
+                <field name="group_id" ref="saldo_app.grupo_administrador"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="False" />
+                <field name="perm_write" eval="False" />
+                <field name="perm_unlink" eval="False" />
+                <field name="active" eval="True" />
+            </record>
+
+        <!--GRUPO CLIENTES-->
+        <record id="saldo_app.grupo_clientes" model="res.groups">
+            <field name="name">Cliente</field>
+            <field name="category_id" ref="saldo_app.application_saldo_app"/>
+            <field name="users" eval="[(4, ref('saldo_app.demo_usuario_cliente'))]" />
+        </record>
+            <!--PERMISOS DE ACCESO DE CLIENTES A MOVIMIENTOS -->
+            <record id="saldo_app.access_movimientos_cliente" model="ir.model.access">
+                <field name="name">access.movimiento.cliente</field>
+                <field name="model_id" ref="saldo_app.model_sa_movimiento"/>
+                <field name="group_id" ref="saldo_app.grupo_clientes"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="True" />
+                <field name="perm_write" eval="True" />
+                <field name="perm_unlink" eval="True" />
+                <field name="active" eval="True" />
+            </record>
+            
+            <!--PERMISOS DE ACCESO DE CLIENTES A CATEGORIAS -->
+            <record id="saldo_app.access_categoria_cliente" model="ir.model.access">
+                <field name="name">access.categoria.cliente</field>
+                <field name="model_id" ref="saldo_app.model_sa_categoria"/>
+                <field name="group_id" ref="saldo_app.grupo_clientes"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="True" />
+                <field name="perm_write" eval="True" />
+                <field name="perm_unlink" eval="True" />
+                <field name="active" eval="True" />
+            </record>
+
+            <!--REGLA: El cliente solo podra visualizar sus registros-->
+            <record id="saldo_app.regla_solo_visualizar_registros_propios" model="ir.rule">
+                <field name="name">Solo visualizar registros propios</field>
+                <field name="model_id" ref="saldo_app.model_sa_movimiento"/>
+                <field name="global" eval="False" />
+                <field name="groups" eval="[(4,ref('saldo_app.grupo_clientes'))]"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="True" />
+                <field name="perm_write" eval="True" />
+                <field name="perm_unlink" eval="True" />
+                <field name="domain_force">[['create_uid','=',user.id]]</field>
+                <field name="active" eval="True" />
+            </record>
+            
+            <!--REGLA: El cliente solo podra visualizar sus categorias-->
+            <record id="saldo_app.regla_solo_visualizar_categorias_propios" model="ir.rule">
+                <field name="name">Solo visualizar categorias propios</field>
+                <field name="model_id" ref="saldo_app.model_sa_categoria"/>
+                <field name="global" eval="False" />
+                <field name="groups" eval="[(4,ref('saldo_app.grupo_clientes'))]"/>
+                <field name="perm_read" eval="True" />
+                <field name="perm_create" eval="True" />
+                <field name="perm_write" eval="True" />
+                <field name="perm_unlink" eval="True" />
+                <field name="domain_force">[['create_uid','=',user.id]]</field>
+                <field name="active" eval="True" />
+            </record>
+
+    </data>
+</odoo>

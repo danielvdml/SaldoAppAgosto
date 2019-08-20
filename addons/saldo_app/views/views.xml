@@ -1,62 +1,6 @@
 <odoo>
 
   <data noupdate="0">
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="saldo_app.list">
-      <field name="name">saldoApp list</field>
-      <field name="model">saldo_app.saldo_app</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
-
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="saldo_app.action_window">
-      <field name="name">saldoApp window</field>
-      <field name="res_model">saldo_app.saldo_app</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="saldo_app.action_server">
-      <field name="name">saldoApp server</field>
-      <field name="model_id" ref="model_saldo_app_saldo_app"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
-
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="saldoApp" id="saldo_app.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="saldo_app.menu_1" parent="saldo_app.menu_root"/>
-    <menuitem name="Menu 2" id="saldo_app.menu_2" parent="saldo_app.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="saldo_app.menu_1_list" parent="saldo_app.menu_1"
-              action="saldo_app.action_window"/>
-    <menuitem name="Server to list" id="saldo_app" parent="saldo_app.menu_2"
-              action="saldo_app.action_server"/>
-    -->
 
     <!--VISTA ESPECIAL PARA INGRESOS-->
     <record id="saldo_app.view_tree_movimientos" model="ir.ui.view">
@@ -66,7 +10,8 @@
         <tree>
           <field name="name"/>
           <field name="monto"/> 
-          <field name="tipo"/>       
+          <field name="tipo"/>    
+          <field name="create_uid" groups="saldo_app.grupo_administrador"/>   
         </tree>
       </field>
     </record>
@@ -80,6 +25,7 @@
           <field name="name"/>
           <field name="monto"/> 
           <field name="tipo"/>       
+          <field name="create_uid" groups="saldo_app.grupo_administrador"/>   
         </tree>
       </field>
     </record>
@@ -93,6 +39,7 @@
           <field name="tipo"/>  
           <field name="name"/>
           <field name="monto"/> 
+          <field name="create_uid" groups="saldo_app.grupo_administrador"/>   
         </tree>
       </field>
     </record>
@@ -113,6 +60,7 @@
                 <field name="comprobante_pago" attrs="{'invisible':[('tipo','=','e')]}"/>
                 <field name="tipo" widget="radio"/>  
                 <field name="fecha"/>
+                <field name="create_uid" groups="saldo_app.grupo_administrador"/>   
               </group>
             </group>
             
@@ -120,6 +68,10 @@
               <field name="categoria_ids" widget="many2many_tags"/>
             </group>
           </sheet>
+          <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
         </form>
       </field>
     </record>
@@ -186,13 +138,13 @@
     <!--Acción de Servidor de Moviminto report wizard-->
       <record id="saldo_app.action_server_movimiento_report_wizard" model="ir.actions.server">
         <field name="name">Reporte de Movimientos</field>
-        <field name="model_id" ref='saldo_app.model_movimiento_report_wizard'/>
+        <field name="model_id" ref='saldo_app.model_movimiento_report_wizard'/> 
         <field name="state">code</field>
         <field name="code">action = model.menu_reporte_movimientos()</field>
       </record>
 
       <record id="saldo_app.menu_reporte_movimientos" model="ir.ui.menu">
-        <field name="name">Reporte</field>
+        <field name="name">Reporte de Movimientos</field>
         <field name="parent_id" ref="saldo_app.menu_movimiento"/>
         <field name="action" ref="saldo_app.action_server_movimiento_report_wizard"/>
         <field name="sequence">12</field>

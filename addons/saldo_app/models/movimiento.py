@@ -7,9 +7,12 @@ from odoo.exceptions import UserError, ValidationError
 
 class Movimiento(models.Model):
     _name = "sa.movimiento" # sa_movimiento
+    
+    _inherit = ['mail.thread']
+    
     name = fields.Char("Movimiento")
     
-    monto = fields.Float("Monto")
+    monto = fields.Float("Monto",track_visibility='onchange')
 
     tipo = fields.Selection(string="Tipo de Movimiento",selection = [("i","Ingreso"),("e","Egreso")])
 
@@ -36,7 +39,8 @@ class Movimiento(models.Model):
 
     @api.onchange("numero_comprobante")
     def _onchange_numero_comprobante(self):
-        self.numero_comprobante = self.numero_comprobante.upper()
+        if type(self.numero_comprobante) == str:
+            self.numero_comprobante = self.numero_comprobante.upper()
 
     @api.constrains("numero_comprobante")
     def _valido_numero_comprobante(self):

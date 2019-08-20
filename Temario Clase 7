@@ -1,0 +1,10 @@
+
+Temas: Grupos, Accesos a modelos, reglas
+
+Creación de dos prefiles de usuario
+Administrador: tiene control de toda la base de datos y configuraciones
+                -> No puede eliminar movimientos que el no ha creado
+            
+Usuario-Cliente: Solo puede ver los movimientos y categorias que este ha creado
+A nivel de vistas
+ -> Se va a ocultar el campo de usuario creador en la vista de movimientos para los usuarios
