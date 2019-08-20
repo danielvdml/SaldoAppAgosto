@@ -43,7 +43,7 @@
                                     </tr>
                                 </tbody>
                             </table>    
-                            <t t-esc="mensaje(movimiento.create_uid.name)"/>                        
+                            <!--<t t-esc="mensaje(movimiento.create_uid.name)"/>-->
                         </t>
                     </div>
                 </t>

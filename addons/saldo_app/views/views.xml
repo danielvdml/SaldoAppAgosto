@@ -161,17 +161,9 @@
         <field name="view_id" ref="saldo_app.view_tree_movimiento_egresos" />
         <field name="view_mode">tree</field>
     </record>
-    
-
-  <!---
-    <menuitem name="Movimientos" 
-              id="saldo_app.menu_movimiento" 
-              parent=""
-              action="saldo_app.view_action_movimiento"/>
-  -->
 
     <record id="saldo_app.menu_movimiento" model="ir.ui.menu">
-      <field name="name">Movimientos Menu</field>
+      <field name="name">Saldo APP</field>
       <field name="parent_id"/>
       <field name="action" ref="saldo_app.view_action_movimiento"/>
       <field name="sequence">10</field>
@@ -189,7 +181,22 @@
         <field name="parent_id" ref="saldo_app.menu_movimiento"/>
         <field name="action" ref="saldo_app.view_action_movimiento_egreso"/>
         <field name="sequence">10</field>
+      </record> 
+
+    <!--Acción de Servidor de Moviminto report wizard-->
+      <record id="saldo_app.action_server_movimiento_report_wizard" model="ir.actions.server">
+        <field name="name">Reporte de Movimientos</field>
+        <field name="model_id" ref='saldo_app.model_movimiento_report_wizard'/>
+        <field name="state">code</field>
+        <field name="code">action = model.menu_reporte_movimientos()</field>
       </record>
 
+      <record id="saldo_app.menu_reporte_movimientos" model="ir.ui.menu">
+        <field name="name">Reporte</field>
+        <field name="parent_id" ref="saldo_app.menu_movimiento"/>
+        <field name="action" ref="saldo_app.action_server_movimiento_report_wizard"/>
+        <field name="sequence">12</field>
+      </record>
+      
   </data>
 </odoo>

@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="saldo_app.view_form_movimiento_report_wizard" model="ir.ui.view">
+            <field name="name">view.form.movimiento.report.wizard</field>
+            <field name="model">movimiento.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="Intervalo de Fecha">
+                            <field name="fecha_inicio"/>                            
+                            <field name="fecha_fin"/>   
+                        </group>
+                    </group>
+                    <group>
+                        <field name="tipo_movimiento" widget="selection"/>
+                    </group>
+                    <footer>
+                        <button string="Imprimir Reporte" type="object" name="imprimir_reporte" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

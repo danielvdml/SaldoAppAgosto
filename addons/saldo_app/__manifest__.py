@@ -29,6 +29,7 @@
         'data/movimientos.xml',
         'views/res_users.xml',
         'views/mi_perfil.xml',
+        'views/movimiento_report_wizard.xml',
         'reports/movimiento_report.xml'
     ],
     # only loaded in demonstration mode
