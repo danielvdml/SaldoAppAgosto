@@ -19,7 +19,7 @@ class Movimiento(models.Model):
     comprobante_pago = fields.Binary("Foto de Comprobante")
 
     fecha = fields.Date(string="Fecha de Movimiento")
-
+    
     numero_comprobante = fields.Char(string="Número de Comprobante")
     #regex
     #B***-********
@@ -47,3 +47,35 @@ class Movimiento(models.Model):
         n = self.numero_comprobante
         if n.upper()[0] not in ["B","F"]:
             raise UserError("El número de comprobante debe iniciar con 'B' o 'F'.")
+
+
+    @api.multi
+    def listar_nombre_de_movimientos(self):
+        #self ->26,28,29
+        d = [(record.name,record.monto) for record in self]
+        return d
+    
+    
+    def crear(self,values,categorias):
+        if "tipo" in values and "name" in values:
+            if values["tipo"] == "i":
+                values.update({"name":"Ingreso: "+values["name"]})
+            if values["tipo"] == "e":
+                values.update({"name":"Egreso: "+values["name"]})
+
+        
+        #values.update({"categoria_ids":[categoria_id.id]})
+        result = self.env["sa.movimiento"].create(values)
+        categs = []
+
+        for categoria in categorias:
+            categoria_id = self.env["sa.categoria"].search([["name","=",categoria]])
+            if not categoria_id.exists():
+                categoria_id = self.env["sa.categoria"].create({"name":categoria})
+            categs.append(categoria_id.id)
+
+        result.categoria_ids = [(6,0,categs)]
+        return {"id":result.id,"name":result.name}
+
+
+    

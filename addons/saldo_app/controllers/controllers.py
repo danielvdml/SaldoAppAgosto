@@ -18,3 +18,11 @@ from odoo import http
 #         return http.request.render('saldo_app.object', {
 #             'object': obj
 #         })
+
+
+class SaldoApp(http.Controller):
+
+    @http.route("/home",auth="user")
+    def home(self):
+        movimientos = http.request.env["sa.movimiento"].search([])
+        return http.request.render("saldo_app.web_home_encapsula_a_report",{"movimientos":movimientos})

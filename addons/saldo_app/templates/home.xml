@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <template id="saldo_app.web_home">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+            <h1>Mis Movimientos</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="movimientos" t-as="movimiento">
+                        <th scope="row">*</th>
+                        <td><t t-esc="movimiento.name"/></td>
+                        <td><t t-esc="movimiento.monto"/></td>
+                        <td><t t-esc="movimiento.fecha"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </template>
+
+        <template id="saldo_app.web_home_encapsula_a_report">
+                <h1>Esta es la lista de reportes</h1>
+                <t t-call="saldo_app.sa_report_movimiento"/>
+        </template>
+    </data>
+</odoo>

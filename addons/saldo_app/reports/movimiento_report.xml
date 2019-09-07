@@ -14,7 +14,7 @@
         <template id="saldo_app.sa_report_movimiento">
             <t t-call="web.html_container"> <!--Me proporcina el CSS-->
                 <t t-foreach="movimientos" t-as="movimiento">
-                    <div class="page">
+                    <div class="page" style="height:800px;border:solid black 2px">
                         <t t-call="web.external_layout"><!--Me proporcina el header y footer-->
                             <h1> 
                                 <t t-esc="titulo"/> - <t t-esc="movimiento.name"/>

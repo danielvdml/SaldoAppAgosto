@@ -32,7 +32,8 @@
         'views/mi_perfil.xml',
         'views/movimiento_report_wizard.xml',
         'reports/movimiento_report.xml',
-        'security/groups.xml'
+        'security/groups.xml',
+        'templates/home.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
